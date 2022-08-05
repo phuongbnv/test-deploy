@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
-use App\Http\Middleware\checkAdminLogin;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,12 +16,3 @@ use App\Http\Middleware\checkAdminLogin;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/login', [UserController::class, 'login'])->name('getLogin');
-Route::post('/login', [UserController::class, 'postLogin']);
-Route::get('/logout', [UserController::class, 'logout']);
-
-Route::group(['middleware' => [checkAdminLogin::class], 'prefix' => 'admin', 'namespace' => 'Admin'], function() {
-	Route::get('/user', [UserController::class, 'index'])->name('admin.user');
-});
-
-
